@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#121110" />
+    <meta name="description" content="What Frame Zero stores, why, and how to delete it." />
+    <title>Privacy | Frame Zero</title>
+    <link rel="icon" href="/frame-zero/favicon.svg" type="image/svg+xml" />
+    <script type="module" crossorigin src="/frame-zero/assets/modulepreload-polyfill-P2Xu9kJm.js"></script>
+    <link rel="stylesheet" crossorigin href="/frame-zero/assets/privacy-B8dcJhwJ.css">
+  </head>
+  <body>
+    <header class="bar">
+      <a class="wordmark" href="./" aria-label="Frame Zero, back to the game">
+        <span class="wordmark-frame">Frame</span><span class="wordmark-zero">Zero</span>
+      </a>
+      <a class="back" href="./">Back to the game</a>
+    </header>
+
+    <main class="doc">
+      <h1>Privacy</h1>
+      <p class="updated">Last updated <time datetime="2026-10-27">27 October 2026</time></p>
+
+      <p class="lede">
+        Frame Zero is a daily film guessing game, run as a personal project by the owner of the GitHub account
+        <a href="https://github.com/agopaluni">agopaluni</a>. In short: you can play without an account, nothing about you
+        leaves your browser unless you sign in, and nothing is ever sold, shared for advertising, or used to track you.
+      </p>
+
+      <h2>Playing as a guest</h2>
+      <ul>
+        <li>Your games (the date, the titles you tried, and whether you solved it) are saved in your browser's local storage, on your device only.</li>
+        <li>They are not sent to us or anyone else.</li>
+        <li>Clearing this site's data in your browser, or using <strong>Delete my data</strong> in the Account panel, removes them.</li>
+      </ul>
+
+      <h2>If you sign in with Google</h2>
+      <ul>
+        <li>Sign-in goes through Google and <a href="https://supabase.com">Supabase</a> Auth. We never see or store your Google password.</li>
+        <li>Google shares your account identifier, email address, name and profile picture link. Supabase Auth keeps these to run your account. The game itself uses only the identifier, and shows your email in the Account panel.</li>
+        <li>For each day you play we keep one record: the date, the puzzle id, the titles you tried, whether you solved it, how many takes it took, and when it was last updated. This is what powers your streak and stats on every device.</li>
+        <li>The first time you sign in, games you played as a guest in that browser are copied into your account. Nothing already in your account is overwritten.</li>
+        <li>A sign-in session token is kept in your browser's local storage so you stay signed in.</li>
+      </ul>
+
+      <h2>What we don't do</h2>
+      <ul>
+        <li>No advertising, no analytics, no tracking scripts, no tracking cookies.</li>
+        <li>No selling or sharing of your data with anyone.</li>
+        <li>Fonts and images are served from this site, not from third parties.</li>
+      </ul>
+
+      <h2>Services involved</h2>
+      <ul>
+        <li><strong>Supabase</strong> stores accounts and game records (<a href="https://supabase.com/privacy">Supabase privacy policy</a>).</li>
+        <li><strong>Google</strong> handles sign-in (<a href="https://policies.google.com/privacy">Google privacy policy</a>).</li>
+        <li><strong>GitHub Pages</strong> hosts the website. Like any web host, GitHub may log technical request data such as IP addresses (<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub privacy statement</a>).</li>
+      </ul>
+
+      <h2>Keeping and deleting your data</h2>
+      <ul>
+        <li>Your data is kept until you delete it.</li>
+        <li>Open the Account panel in the game and choose <strong>Delete my data</strong>. If you are signed in, this deletes your account and every game record straight away, and clears this browser. It cannot be undone.</li>
+        <li>Signing out on its own keeps your account and records.</li>
+      </ul>
+
+      <h2>Children</h2>
+      <p>Frame Zero is not directed at children under 13, and we do not knowingly collect their data.</p>
+
+      <h2>Changes</h2>
+      <p>If this policy changes, the new version will be posted on this page with a new date.</p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions or requests: open an issue at
+        <a href="https://github.com/agopaluni/frame-zero/issues">github.com/agopaluni/frame-zero/issues</a>.
+      </p>
+    </main>
+  </body>
+</html>
