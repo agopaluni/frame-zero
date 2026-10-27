@@ -8,9 +8,9 @@
     <meta name="description" content="One film frame a day, out of focus. Name the film in six takes; every miss pulls focus." />
     <title>Frame Zero</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <script type="module" crossorigin src="/assets/main-BNy-nB14.js"></script>
+    <script type="module" crossorigin src="/assets/main-Be_odym7.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-P2Xu9kJm.js">
-    <link rel="stylesheet" crossorigin href="/assets/main-vpgV5QMd.css">
+    <link rel="stylesheet" crossorigin href="/assets/main-DkLchN_x.css">
   </head>
   <body>
     <a class="skip-link" href="#deck">Skip to the game controls</a>
@@ -23,6 +23,9 @@
       <nav class="bar-actions" aria-label="Game menu">
         <button type="button" class="icon-btn" id="open-help" aria-haspopup="dialog" aria-controls="help-panel">
           <span class="icon" data-icon="help"></span><span class="sr-only">How to play</span>
+        </button>
+        <button type="button" class="icon-btn" id="open-board" aria-haspopup="dialog" aria-controls="board-panel">
+          <span class="icon" data-icon="board"></span><span class="sr-only">Leaderboard</span>
         </button>
         <button type="button" class="icon-btn" id="open-stats" aria-haspopup="dialog" aria-controls="stats-panel">
           <span class="icon" data-icon="stats"></span><span class="sr-only">Statistics</span>
@@ -54,6 +57,9 @@
             <button type="button" class="btn btn-quiet" id="screen-retry" hidden>
               <span class="icon" data-icon="retry"></span>Try again
             </button>
+            <button type="button" class="btn btn-quiet" id="screen-archive" data-open-archive hidden>
+              <span class="icon" data-icon="archive"></span>Play past frames
+            </button>
           </div>
         </div>
       </section>
@@ -63,6 +69,11 @@
           <span class="scale-index" id="scale-index"></span>
         </div>
         <ol class="scale-stops" id="scale-stops"></ol>
+      </div>
+
+      <div class="archive-note" id="archive-note" hidden>
+        <p><strong>From the archive.</strong> Just for fun: this one doesn't count toward your streak, stats or the leaderboard.</p>
+        <button type="button" class="btn btn-quiet btn-small" id="back-to-today">Back to today</button>
       </div>
 
       <section class="deck" id="deck" aria-label="Takes and guesses" tabindex="-1">
@@ -125,6 +136,9 @@
             </button>
           </div>
           <p class="share-status" id="share-status" role="status"></p>
+          <div class="slate-more">
+            <button type="button" class="btn btn-quiet btn-small" data-open-archive><span class="icon" data-icon="archive"></span>Play past frames</button>
+          </div>
           <p class="credit credit-slate">A daily game by <a href="https://atharvgopaluni.com">Atharv Gopaluni</a></p>
         </section>
       </section>
@@ -169,6 +183,41 @@
         <h3 class="dist-title" id="dist-title">Solved on take</h3>
         <ol class="dist" id="dist" aria-labelledby="dist-title"></ol>
         <p class="panel-note" id="stats-note"></p>
+        <div class="panel-actions">
+          <button type="button" class="btn btn-quiet btn-small" data-open-archive><span class="icon" data-icon="archive"></span>Play past frames</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="panel" id="board-panel" aria-labelledby="board-title">
+      <div class="panel-head">
+        <h2 id="board-title">Leaderboard</h2>
+        <button type="button" class="icon-btn" data-close><span class="icon" data-icon="close"></span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="panel-body">
+        <div class="tabs" role="tablist" aria-label="Leaderboard">
+          <button type="button" role="tab" class="tab" id="tab-month" aria-selected="true" aria-controls="board-month">This month</button>
+          <button type="button" role="tab" class="tab" id="tab-today" aria-selected="false" aria-controls="board-today" tabindex="-1">Today</button>
+        </div>
+        <div role="tabpanel" id="board-month" aria-labelledby="tab-month"></div>
+        <div role="tabpanel" id="board-today" aria-labelledby="tab-today" hidden></div>
+        <p class="panel-note board-rules">Points each month: 6 for naming the film on the first take, down to 1 on the sixth, nothing for a miss. Only frames played on their own day count. Speed never does.</p>
+        <section class="username" aria-labelledby="username-title">
+          <h3 id="username-title">Your name on the board</h3>
+          <div id="username-body"></div>
+          <p class="panel-note" id="username-status" role="status"></p>
+        </section>
+      </div>
+    </dialog>
+
+    <dialog class="panel" id="archive-panel" aria-labelledby="archive-title">
+      <div class="panel-head">
+        <h2 id="archive-title">Past frames</h2>
+        <button type="button" class="icon-btn" data-close><span class="icon" data-icon="close"></span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="panel-body">
+        <p class="panel-intro">Missed a day? Play it here, just for fun. Past frames don't count toward your streak, stats or the leaderboard.</p>
+        <ol class="archive-list" id="archive-list"></ol>
       </div>
     </dialog>
 

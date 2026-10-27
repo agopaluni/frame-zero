@@ -25,24 +25,33 @@
 
       <p class="lede">
         Frame Zero is a daily film guessing game, made and run as a personal project by
-        <a href="https://atharvgopaluni.com">Atharv Gopaluni</a>. In short: you can play without an account, nothing about you
-        leaves your browser unless you sign in, and nothing is ever sold, shared for advertising, or used to track you.
+        <a href="https://atharvgopaluni.com">Atharv Gopaluni</a>. In short: you can play without an account, we keep only
+        what the game needs to check your takes and keep score, and nothing is ever sold, shared for advertising, or used
+        to track you.
       </p>
 
       <h2>Playing as a guest</h2>
       <ul>
-        <li>Your games (the date, the titles you tried, and whether you solved it) are saved in your browser's local storage, on your device only.</li>
-        <li>They are not sent to us or anyone else.</li>
-        <li>Clearing this site's data in your browser, or using <strong>Delete my data</strong> in the Account panel, removes them.</li>
+        <li>So the server can check each take fairly, your browser gets an anonymous guest id from <a href="https://supabase.com">Supabase</a>. It carries no name, no email and nothing about your device.</li>
+        <li>For each day you play we keep one record against that id: the date, the titles you tried, whether you solved it, how many takes it took, and when it was last updated.</li>
+        <li><strong>Delete my data</strong> in the Account panel deletes the guest id and every record. Clearing this site's data in your browser also cuts the link; the orphaned records hold nothing that identifies you.</li>
       </ul>
 
       <h2>If you sign in with Google</h2>
       <ul>
-        <li>Sign-in goes through Google and <a href="https://supabase.com">Supabase</a> Auth. We never see or store your Google password.</li>
+        <li>Sign-in goes through Google and Supabase Auth. We never see or store your Google password.</li>
         <li>Google shares your account identifier, email address, name and profile picture link. Supabase Auth keeps these to run your account. The game itself uses only the identifier, and shows your email in the Account panel.</li>
-        <li>For each day you play we keep one record: the date, the puzzle id, the titles you tried, whether you solved it, how many takes it took, and when it was last updated. This is what powers your streak and stats on every device.</li>
-        <li>The first time you sign in, games you played as a guest in that browser are copied into your account. Nothing already in your account is overwritten.</li>
+        <li>Your games are kept the same way as a guest's, so your streak and stats follow you to every device.</li>
+        <li>When you first sign in, the games you played as a guest in that browser move into your account. Nothing already in your account is overwritten.</li>
         <li>A sign-in session token is kept in your browser's local storage so you stay signed in.</li>
+      </ul>
+
+      <h2>The leaderboard</h2>
+      <ul>
+        <li>The leaderboard is opt-in. You appear on it only if you choose a username.</li>
+        <li>It shows your username and your scores: monthly points, streak, days played, and which take you solved today's frame on. It never shows your email or your Google name.</li>
+        <li>You can change your username once a week or leave the board at any time, which releases the name.</li>
+        <li>Usernames that are offensive or impersonate someone can be removed from the board.</li>
       </ul>
 
       <h2>What we don't do</h2>
@@ -62,7 +71,7 @@
       <h2>Keeping and deleting your data</h2>
       <ul>
         <li>Your data is kept until you delete it.</li>
-        <li>Open the Account panel in the game and choose <strong>Delete my data</strong>. If you are signed in, this deletes your account and every game record straight away, and clears this browser. It cannot be undone.</li>
+        <li>Open the Account panel in the game and choose <strong>Delete my data</strong>. It deletes your account (guest or Google), your username and every game record straight away. It cannot be undone.</li>
         <li>Signing out on its own keeps your account and records.</li>
       </ul>
 
