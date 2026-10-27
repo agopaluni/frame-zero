@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#121110" />
+    <meta name="description" content="One film frame a day, out of focus. Name the film in six takes; every miss pulls focus." />
+    <title>Frame Zero</title>
+    <link rel="icon" href="/frame-zero/favicon.svg" type="image/svg+xml" />
+    <script type="module" crossorigin src="/frame-zero/assets/index-B_KPyTnX.js"></script>
+    <link rel="stylesheet" crossorigin href="/frame-zero/assets/index-Bi8pjbzO.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#deck">Skip to the game controls</a>
+
+    <header class="bar">
+      <a class="wordmark" href="./" aria-label="Frame Zero">
+        <span class="wordmark-frame">Frame</span><span class="wordmark-zero">Zero</span>
+      </a>
+      <p class="bar-meta"><span id="puzzle-no">No. &ndash;</span><span id="puzzle-date"></span></p>
+      <nav class="bar-actions" aria-label="Game menu">
+        <button type="button" class="icon-btn" id="open-help" aria-haspopup="dialog" aria-controls="help-panel">
+          <span class="icon" data-icon="help"></span><span class="sr-only">How to play</span>
+        </button>
+        <button type="button" class="icon-btn" id="open-stats" aria-haspopup="dialog" aria-controls="stats-panel">
+          <span class="icon" data-icon="stats"></span><span class="sr-only">Statistics</span>
+        </button>
+        <button type="button" class="icon-btn" id="open-account" aria-haspopup="dialog" aria-controls="account-panel">
+          <span class="icon" data-icon="account"></span><span class="account-initial" hidden></span><span class="sr-only" id="account-label">Account</span>
+        </button>
+      </nav>
+    </header>
+
+    <main class="stage" id="stage" data-state="loading">
+      <section class="monitor" aria-labelledby="monitor-label">
+        <h1 class="sr-only" id="monitor-label">Today's frame</h1>
+        <div class="screen" id="screen">
+          <div class="layers" id="layers" role="img" aria-label="Film frame"></div>
+          <button type="button" class="loupe-open" id="loupe-open" aria-haspopup="dialog" aria-controls="loupe" disabled>
+            <span class="sr-only">Enlarge the frame</span>
+          </button>
+          <div class="overlay" aria-hidden="true">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <span class="ov ov-tl"><span class="rec-dot"></span><span id="ov-rec">Rec</span></span>
+            <span class="ov ov-tr" id="ov-take">Take 1/6</span>
+            <span class="ov ov-bl" id="ov-focus">Focus 12%</span>
+            <span class="ov ov-br" id="ov-aspect">2.39:1</span>
+          </div>
+          <div class="screen-message" id="screen-message" hidden>
+            <p class="screen-message-title" id="screen-message-title"></p>
+            <p class="screen-message-body" id="screen-message-body"></p>
+            <button type="button" class="btn btn-quiet" id="screen-retry" hidden>
+              <span class="icon" data-icon="retry"></span>Try again
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div class="focus-scale" id="focus-scale" aria-hidden="true">
+        <div class="scale-track">
+          <span class="scale-index" id="scale-index"></span>
+        </div>
+        <ol class="scale-stops" id="scale-stops"></ol>
+      </div>
+
+      <section class="deck" id="deck" aria-label="Takes and guesses" tabindex="-1">
+        <div class="log">
+          <div class="log-head">
+            <p class="log-count" id="log-count">Take 1 of 6</p>
+            <ol class="slots" id="slots" aria-hidden="true"></ol>
+          </div>
+          <ol class="log-list" id="log-list" aria-label="Your takes"></ol>
+        </div>
+
+        <form class="guess" id="guess-form" autocomplete="off" novalidate>
+          <label class="guess-label" for="guess-input">Name the film</label>
+          <div class="combo" id="combo">
+            <span class="combo-icon icon" data-icon="search"></span>
+            <input
+              id="guess-input"
+              class="combo-input"
+              type="text"
+              role="combobox"
+              aria-autocomplete="list"
+              aria-expanded="false"
+              aria-controls="title-list"
+              aria-describedby="guess-hint"
+              autocapitalize="words"
+              autocorrect="off"
+              spellcheck="false"
+              enterkeyhint="go"
+              placeholder="Start typing a title"
+              disabled
+            />
+            <ul class="combo-list" id="title-list" role="listbox" aria-label="Matching films" hidden></ul>
+          </div>
+          <p class="guess-hint" id="guess-hint">Pick a title from the list. Typos never cost a take.</p>
+          <div class="guess-actions">
+            <button type="button" class="btn btn-quiet" id="skip-btn" disabled>
+              <span class="icon" data-icon="skip"></span>Skip<span class="sr-only"> this take</span>
+            </button>
+            <button type="submit" class="btn btn-primary" id="guess-btn" disabled>
+              Guess<span class="icon" data-icon="enter"></span>
+            </button>
+          </div>
+        </form>
+
+        <section class="slate" id="slate" aria-labelledby="slate-title" hidden>
+          <div class="slate-sticks" aria-hidden="true"></div>
+          <dl class="slate-fields">
+            <div><dt>Roll</dt><dd id="slate-no"></dd></div>
+            <div><dt>Take</dt><dd id="slate-take"></dd></div>
+            <div><dt>Streak</dt><dd id="slate-streak"></dd></div>
+            <div><dt>Next in</dt><dd><time id="countdown">--:--:--</time></dd></div>
+          </dl>
+          <h2 class="slate-title" id="slate-title"></h2>
+          <p class="slate-meta"><span class="slate-year" id="slate-year"></span><span class="slate-verdict" id="slate-verdict"></span></p>
+          <div class="slate-share">
+            <p class="share-row" id="share-row" aria-hidden="true"></p>
+            <button type="button" class="btn btn-primary" id="share-btn">
+              <span class="icon" data-icon="share"></span>Share result
+            </button>
+          </div>
+          <p class="share-status" id="share-status" role="status"></p>
+        </section>
+      </section>
+    </main>
+
+    <div class="sr-only" aria-live="polite" aria-atomic="true" id="live"></div>
+
+    <dialog class="loupe" id="loupe" aria-label="Enlarged frame">
+      <div class="loupe-stage" id="loupe-stage">
+        <div class="loupe-meta" aria-hidden="true"><span id="loupe-take"></span><span id="loupe-focus"></span></div>
+      </div>
+      <button type="button" class="icon-btn loupe-close" data-close><span class="icon" data-icon="close"></span><span class="sr-only">Close enlarged frame</span></button>
+    </dialog>
+
+    <dialog class="panel" id="help-panel" aria-labelledby="help-title">
+      <div class="panel-head">
+        <h2 id="help-title">How to play</h2>
+        <button type="button" class="icon-btn" data-close><span class="icon" data-icon="close"></span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="panel-body prose">
+        <p>One frame a day from a film, the same frame for everyone. It starts badly out of focus.</p>
+        <p>Name the film by picking it from the list. A wrong guess or a skip uses a take and pulls focus a little further. You have six takes; the sixth is the sharp frame.</p>
+        <p>Typos never cost a take: if a title is not in the list, nothing is spent.</p>
+        <p>A new frame arrives at midnight, your time.</p>
+        <h3>Keyboard</h3>
+        <dl class="keys">
+          <div><dt><kbd>Up</kbd> <kbd>Down</kbd></dt><dd>Move through matching titles</dd></div>
+          <div><dt><kbd>Enter</kbd></dt><dd>Choose a title, then Enter again to guess</dd></div>
+          <div><dt><kbd>Esc</kbd></dt><dd>Close the list</dd></div>
+        </dl>
+      </div>
+    </dialog>
+
+    <dialog class="panel" id="stats-panel" aria-labelledby="stats-title">
+      <div class="panel-head">
+        <h2 id="stats-title">Statistics</h2>
+        <button type="button" class="icon-btn" data-close><span class="icon" data-icon="close"></span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="panel-body">
+        <dl class="stat-line" id="stat-line"></dl>
+        <h3 class="dist-title" id="dist-title">Solved on take</h3>
+        <ol class="dist" id="dist" aria-labelledby="dist-title"></ol>
+        <p class="panel-note" id="stats-note"></p>
+      </div>
+    </dialog>
+
+    <dialog class="panel" id="account-panel" aria-labelledby="account-title">
+      <div class="panel-head">
+        <h2 id="account-title">Account</h2>
+        <button type="button" class="icon-btn" data-close><span class="icon" data-icon="close"></span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="panel-body prose">
+        <div id="account-state"></div>
+        <h3>What is stored</h3>
+        <p id="privacy-note"></p>
+        <h3>Delete my data</h3>
+        <p id="delete-copy"></p>
+        <div class="delete-row">
+          <button type="button" class="btn btn-danger" id="delete-btn">Delete my data</button>
+          <button type="button" class="btn btn-quiet" id="delete-cancel" hidden>Keep it</button>
+        </div>
+        <p class="panel-note" id="account-status" role="status"></p>
+      </div>
+    </dialog>
+  </body>
+</html>
